@@ -2,7 +2,7 @@
 // Run: npm test --prefix backend
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { calculateMatchScore } from '../services/matching.js';
+import { calculateMatchScore, nameSimilarity } from '../services/matching.js';
 
 import { call, asStudent, asOtherStudent, asStaff, asAdmin, today } from './helpers.js';
 
@@ -16,6 +16,10 @@ test('matching: spec example scores as a high match', () => {
   assert.equal(Math.round(r.breakdown.reduce((sum, row) => sum + row.points, 0)), r.score);
   assert.deepEqual(r.breakdown.map((row) => row.key), ['category', 'name', 'color', 'brand', 'location', 'date']);
   assert.deepEqual(calculateMatchScore({ itemName: 'Calculator', category: 'Books' }, { itemName: 'Wallet', category: 'Wallets' }).confidence, null);
+  // everyday synonyms and plurals count as the same word
+  assert.equal(nameSimilarity('Buds', 'Earphones'), 1);
+  assert.equal(nameSimilarity('Spectacles', 'Black frame glasses'), 0.5);
+  assert.equal(nameSimilarity('Black Samsung Earbuds', 'Samsung Galaxy Buds Pro').toFixed(3), '0.571');
 });
 
 test('student -> lost report -> match -> claim -> staff approval -> handover -> recovered', async () => {

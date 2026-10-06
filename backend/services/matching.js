@@ -13,12 +13,15 @@ const SYNONYMS = {
   book: 'notebook', diary: 'notebook', wristwatch: 'watch', laptop: 'laptop', notebookpc: 'laptop',
 };
 
+const singular = (w) => (w.length > 3 && w.endsWith('s') ? w.slice(0, -1) : w);
+
+// Synonym first, then plural -> singular, so a synonym and the word it stands for always end up identical
+// ("spectacles" and "glasses" both become "glasse").
 const tokens = (text = '') =>
   new Set(
     String(text).toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/)
       .filter((w) => w && !STOP.has(w))
-      .map((w) => SYNONYMS[w] || (w.length > 3 && w.endsWith('s') ? w.slice(0, -1) : w))
-      .map((w) => SYNONYMS[w] || w)
+      .map((w) => singular(SYNONYMS[w] || SYNONYMS[singular(w)] || w))
   );
 
 // Dice coefficient: 2 * shared words / (words in A + words in B)
