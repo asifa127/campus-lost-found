@@ -1,7 +1,8 @@
 # Symposium Demo Script
 
 Before each run: `npm run seed --prefix backend` (the demo changes the data, the seed puts it back).
-Open http://localhost:5173. The API runs on http://localhost:5000.
+Open http://localhost:5173 (the API runs on http://localhost:5000), or the live site https://campus-lost-found-ds7f.onrender.com.
+On the live site the free hosting sleeps when idle, so open it a minute before you start. Reloading its demo data means clearing the database in Atlas and restarting the Render service, because it only seeds an empty database.
 
 | Role    | Email               | Password    |
 |---------|---------------------|-------------|

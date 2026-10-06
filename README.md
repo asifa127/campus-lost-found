@@ -2,6 +2,8 @@
 
 A full-stack web app where students report lost and found belongings, a **Smart Matching Algorithm** pairs them automatically, and staff verify ownership and hand items back.
 
+**Live demo:** https://campus-lost-found-ds7f.onrender.com (log in with the [demo credentials](#demo-credentials)). It runs on Render's free plan, so after about 15 idle minutes the first request can take up to a minute.
+
 ![Potential match](docs/screenshots/potential-match.png)
 
 ## Problem statement
